@@ -2,7 +2,7 @@
 #define MTHREAD_H
 #include "helper.h"
 #include <QObject>
-
+#include "mdataframe.h"
 
 class MThread : public QThread
 {
@@ -12,12 +12,12 @@ public:
     void run() override;
 signals:
     void errorOccur(QTcpSocket::SocketError socketError);
-    void dataFrame();
+    void sendDataFrame(MDataFrame dataFrame);
 public slots:
     void remotePeerDisconnect();
     void parseData();
 private:
-    int socketDescriptor;
+    qintptr socketDescriptor;
     QTcpSocket *client;
 };
 

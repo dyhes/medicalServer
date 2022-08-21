@@ -20,5 +20,5 @@ void MainWindow::receiveDataFrame(MDataFrame dataframe)
 
 void MainWindow::handleError(QAbstractSocket::SocketError socketError)
 {
-
+    qDebug()<<socketError;
 }

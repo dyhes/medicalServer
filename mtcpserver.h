@@ -10,7 +10,8 @@ class MTcpServer : public QTcpServer
 {
     Q_OBJECT
 public:
-    QHostAddress * ip{"127.0.0.1"};
+    MTcpServer(QObject *parent=nullptr);
+    QHostAddress ip{"127.0.0.1"};
     MainWindow *wind;
     quint16 port{8080};
     void start();

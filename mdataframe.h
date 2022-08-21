@@ -1,17 +1,11 @@
 #ifndef MDATAFRAME_H
 #define MDATAFRAME_H
 
-#include <QObject>
 
-class MDataFrame : public QObject
+class MDataFrame
 {
-    Q_OBJECT
 public:
-    explicit MDataFrame(QObject *parent = nullptr);
-
-signals:
-
-public slots:
+    MDataFrame();
 };
 
 #endif // MDATAFRAME_H

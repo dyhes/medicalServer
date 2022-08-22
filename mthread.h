@@ -11,14 +11,14 @@ public:
     explicit MThread(int socketDescriptor,QObject *parent = nullptr);
     void run() override;
 signals:
-    void errorOccur(QTcpSocket::SocketError socketError);
-    void sendDataFrame(MDataFrame dataFrame);
+    void sendDataFrame(MDataFrame* dataFrame);
 public slots:
-    void remotePeerDisconnect();
+    void sendError(QAbstractSocket::SocketError socketError);
     void parseData();
 private:
     qintptr socketDescriptor;
     QTcpSocket *client;
+    void requestResending();
 };
 
 #endif // MTHREAD_H

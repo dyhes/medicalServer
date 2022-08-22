@@ -13,12 +13,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::receiveDataFrame(MDataFrame dataframe)
+void MainWindow::receiveDataFrame(MDataFrame* dataframe)
 {
-
-}
-
-void MainWindow::handleError(QAbstractSocket::SocketError socketError)
-{
-    qDebug()<<socketError;
+    //qDebug()<<dataframe->error;
 }

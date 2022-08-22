@@ -18,7 +18,6 @@ void MTcpServer::incomingConnection(qintptr socketDescriptor)
 {
     MThread *thread=new MThread(socketDescriptor,this);
     connect(thread,&MThread::finished,thread,&MThread::deleteLater);
-    connect(thread,&MThread::errorOccur,wind,&MainWindow::handleError);
     connect(thread,&MThread::sendDataFrame,wind,&MainWindow::receiveDataFrame);
     thread->start();
 }

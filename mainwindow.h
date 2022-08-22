@@ -17,8 +17,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 public slots:
-    void receiveDataFrame(MDataFrame dataframe);
-    void handleError(QAbstractSocket::SocketError socketError);
+    void receiveDataFrame(MDataFrame* dataframe);
 private:
     Ui::MainWindow *ui;
 };

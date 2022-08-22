@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network sql printsupport
 TARGET = medicalServer
 TEMPLATE = app
 
@@ -27,14 +27,23 @@ SOURCES += \
         mainwindow.cpp \
     mtcpserver.cpp \
     mthread.cpp \
-    mdataframe.cpp
+    mdataframe.cpp \
+    form.cpp \
+    patientinfo.cpp \
+    table.cpp
 
 HEADERS += \
         mainwindow.h \
     mtcpserver.h \
     helper.h \
     mthread.h \
-    mdataframe.h
+    mdataframe.h \
+    form.h \
+    patientinfo.h \
+    table.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    form.ui \
+    patientinfo.ui \
+    table.ui

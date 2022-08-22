@@ -10,5 +10,10 @@ int main(int argc, char *argv[])
     server.wind=&w;
     server.start();
     w.show();
+    QFont f("Microsoft YaHei");
+    a.setFont(f);
+    patientInfo patient;
+    patient.show();
+
     return a.exec();
 }

@@ -6,8 +6,8 @@
 #include <form.h>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
-
-#include <QDateTime>
+#include <analysisreport.h>
+#include <QTime>
 
 namespace Ui {
 class patientInfo;
@@ -22,7 +22,7 @@ public:
     ~patientInfo();
     QSqlDatabase db;
     QSqlQuery sql_query;
-    void insertData(QDateTime time,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp);//数据插入数据库接口
+    void insertData(QString time,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp);//数据插入数据库接口
     void openDatabase();//连接数据库
     void createTable();//创建数据表
 
@@ -43,6 +43,7 @@ private slots:
 private:
     Ui::patientInfo *ui;
     Form *formhome;
+    AnalysisReport analysisReportHome;
 
 };
 

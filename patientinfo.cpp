@@ -7,7 +7,7 @@
 #include<QStringList>
 #include<QSqlQuery>
 #include<mainwindow.h>
-
+#include<QDateTime>
 patientInfo::patientInfo(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::patientInfo)
@@ -20,7 +20,7 @@ patientInfo::patientInfo(QWidget *parent) :
     openDatabase();
 
 //    createTable();
-
+    insertData("20:20:20",7,"zhang",20,"male","80,90,100",80,"80,90,100",90,"80,90,100",100);
 }
 
 patientInfo::~patientInfo()
@@ -29,21 +29,12 @@ patientInfo::~patientInfo()
 }
 
 //插入数据至数据库
-void patientInfo::insertData(QDateTime datetime,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp)
+void patientInfo::insertData(QString time,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp)
 {
-    sql_query.prepare("INSERT INTO patient (datetime,id,name,age,gender,ecg,keyEcg,spo2,keySpo2,resp,keyResp) Values (:datetime,:id,:name,:age,:gender,:ecg,:keyEcg,:spo2,:keySpo2,:resp,:keyResp)");
-    sql_query.bindValue(":time",datetime);
-    sql_query.bindValue(":id",id);
-    sql_query.bindValue(":name",name);
-    sql_query.bindValue(":age",age);
-    sql_query.bindValue(":gender",gender);
-    sql_query.bindValue(":ecg",ecg);
-    sql_query.bindValue(":keyEcg",keyEcg);
-    sql_query.bindValue(":spo2",spo2);
-    sql_query.bindValue(":keySpo2",keySpo2);
-    sql_query.bindValue(":resp",resp);
-    sql_query.bindValue(":keyResp",keyResp);
-    if(!sql_query.exec()){
+    QString str = QString("INSERT INTO patient (time,id,name,age,gender,ecg,keyEcg,spo2,keySpo2,resp,keyResp) Values ('%1','%2','%3','%4','%5','%6','%7','%8','%9','%10','%11')")
+            .arg(time).arg(id).arg(name).arg(age).arg(gender).arg(ecg).arg(keyEcg).arg(spo2).arg(keySpo2).arg(resp).arg(keyResp);
+    QSqlQuery query;
+    if(!query.exec(str)){
         qDebug()<<"Error:failed to insert!"<<sql_query.lastError();
     }
 }
@@ -51,20 +42,20 @@ void patientInfo::insertData(QDateTime datetime,int id,QString name,int age,QStr
 void patientInfo::openDatabase()
 {
     db = QSqlDatabase::addDatabase("QMYSQL3");
-    db.setHostName("127.0.0.1");  //连接本地主机
+    db.setHostName(" ");  //连接本地主机
     db.setPort(3306);
     db.setDatabaseName("db1");//数据库名称待修改
     db.setUserName("root");
-    db.setPassword("zbh159110");//密码待填写
+    db.setPassword(" ");//密码待填写
     bool ok = db.open();
 
-//    if (ok){
-//        QMessageBox::information(this, "infor", "link success");
-//    }
-//    else {
-//        QMessageBox::information(this, "infor", "link failed");
-//        qDebug()<<"error open database because"<<db.lastError().text();
-//    }
+    if (ok){
+        QMessageBox::information(this, "infor", "link success");
+    }
+    else {
+        QMessageBox::information(this, "infor", "link failed");
+        qDebug()<<"error open database because"<<db.lastError().text();
+    }
 }
 
 //创建数据表
@@ -73,7 +64,7 @@ void patientInfo::createTable()
     sql_query = db.exec("DROP TABLE if exists patient");
     qDebug()<<"drop table patient";
     QString str = QString ("create table patient("
-                           "time datetime,"
+                           "time varchar(30),"
                            "id int primary key AUTO_INCREMENT,"
                            "name varchar(20) not null,"
                            "age int,"
@@ -234,7 +225,8 @@ void patientInfo::on_btnPrint_clicked()
     if (name != "")
     {
         this->hide();
-        formhome = new Form(name);
+//        formhome = new Form(name);
+        analysisReportHome.show();
     }
     else
     {

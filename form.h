@@ -1,6 +1,6 @@
 #ifndef FORM_H
 #define FORM_H
-
+#include <QDateTime>
 #include <QWidget>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
@@ -27,16 +27,13 @@ public:
     table *tableView;
 
 private slots:
-    void on_pushButton_clicked();
-
+//    void on_pushButton_clicked();
+//    void selectData(QString name, QDateTime time, QString dataItem);
 private:
     Ui::Form *ui;
     QString m_name;
-    void selectData(QString name);
-    QGridLayout *layout;
-    QWidget *central;
-    QWidget *mainTitle;
-    void setuplayout();
+
+
 };
 
 #endif // FORM_H

@@ -30,7 +30,10 @@ SOURCES += \
     mdataframe.cpp \
     form.cpp \
     patientinfo.cpp \
-    table.cpp
+    table.cpp \
+    datachart.cpp \
+    analysisdraw.cpp \
+    analysisreport.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,10 +43,15 @@ HEADERS += \
     mdataframe.h \
     form.h \
     patientinfo.h \
-    table.h
+    table.h \
+    datachart.h \
+    analysisdraw.h \
+    analysisreport.h
 
 FORMS += \
         mainwindow.ui \
     form.ui \
     patientinfo.ui \
-    table.ui
+    table.ui \
+    datachart.ui \
+    analysisreport.ui

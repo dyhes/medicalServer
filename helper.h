@@ -11,4 +11,11 @@
 #include <QJsonValue>
 #include <QDateTime>
 #include <QVariantList>
+#include <QSqlDatabase>
+#include <QMessageBox>
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
 #endif // HELPER_H

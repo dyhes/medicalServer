@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network sql
 TARGET = medicalServer
 TEMPLATE = app
 
@@ -27,14 +27,16 @@ SOURCES += \
         mainwindow.cpp \
     mtcpserver.cpp \
     mthread.cpp \
-    mdataframe.cpp
+    mdataframe.cpp \
+    msqlservice.cpp
 
 HEADERS += \
         mainwindow.h \
     mtcpserver.h \
     helper.h \
     mthread.h \
-    mdataframe.h
+    mdataframe.h \
+    msqlservice.h
 
 FORMS += \
         mainwindow.ui

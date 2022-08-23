@@ -42,6 +42,7 @@ void MThread::parseData()
 {
     QByteArray rawData;
     rawData=client->readAll();
+    qDebug()<<rawData;
     QJsonParseError *parseError=new QJsonParseError();
     QJsonDocument jsonDoc=QJsonDocument::fromJson(rawData,parseError);
     if(parseError->error!=QJsonParseError::NoError){
@@ -65,7 +66,6 @@ void MThread::parseData()
     if (json.contains("spo2") && json["spo2"].isArray())spo2=json["spo2"].toArray().toVariantList();
     if (json.contains("resp") && json["resp"].isArray())resp=json["resp"].toArray().toVariantList();
     MDataFrame *data=new MDataFrame(this->currentThreadId(),gender,name,age,ecg,spo2,resp,heartRate,highPr,lowPr,oxygen);
-    qDebug()<<name;
     emit sendDataFrame(data);
     //save to database
 }

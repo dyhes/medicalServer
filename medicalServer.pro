@@ -28,7 +28,9 @@ SOURCES += \
     mtcpserver.cpp \
     mthread.cpp \
     mdataframe.cpp \
-    msqlservice.cpp
+    msqlservice.cpp \
+    patient.cpp \
+    waveblock.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -36,7 +38,9 @@ HEADERS += \
     helper.h \
     mthread.h \
     mdataframe.h \
-    msqlservice.h
+    msqlservice.h \
+    patient.h \
+    waveblock.h
 
 FORMS += \
         mainwindow.ui

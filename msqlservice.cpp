@@ -20,7 +20,7 @@ QVariantList MsqlService::decode(QByteArray &json)
 {
     QJsonDocument doc=QJsonDocument::fromJson(json);
     return doc.array().toVariantList();
-}
+
 
 bool MsqlService::insertInfo(QString gender, QString name, int age, QVariantList &ecg, QVariantList &spo2, QVariantList &resp, int heartRate, int highPr, int lowPr, int oxygen)
 {

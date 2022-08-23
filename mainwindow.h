@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "mdataframe.h"
 #include "helper.h"
+#include "patient.h"
 
 namespace Ui {
 class MainWindow;

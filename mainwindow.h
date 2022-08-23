@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "mdataframe.h"
 #include "helper.h"
+#include "patient.h"
 #include <QWidget>
 #include <QGridLayout>
 #include <QMainWindow>

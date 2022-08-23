@@ -7,6 +7,7 @@
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network sql printsupport charts
+
 TARGET = medicalServer
 TEMPLATE = app
 
@@ -28,6 +29,9 @@ SOURCES += \
     mtcpserver.cpp \
     mthread.cpp \
     mdataframe.cpp \
+    msqlservice.cpp \
+    patient.cpp \
+    waveblock.cpp
     form.cpp \
     patientinfo.cpp \
     table.cpp \
@@ -41,6 +45,9 @@ HEADERS += \
     helper.h \
     mthread.h \
     mdataframe.h \
+    msqlservice.h \
+    patient.h \
+    waveblock.h
     form.h \
     patientinfo.h \
     table.h \

@@ -235,19 +235,6 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonEcg">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>110</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>显示病人心电报表</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QFrame" name="frameTable">
    <property name="enabled">

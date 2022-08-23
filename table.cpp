@@ -25,6 +25,7 @@ void table::drawTable()
     QDateTime beginTime = patient->getBeginTime();
     QDateTime endTime = patient->getEndTime();
     qint64 interval = patient->getInterval();
+
    //未加接口
 //    QSqlQueryModel MSqlService::getTableData(int id,QDateTime beginTime,QDateTime endTime,qint64 interval){
 //         QString sql = QString("select * from bodySigns where id = '' and time between '' and '' ").arg(id).arg(beginTime).arg(endTime).arg(interval);

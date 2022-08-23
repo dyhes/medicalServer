@@ -10,6 +10,7 @@
 #include <QString>
 #include <QBarSet>
 #include <patientinfo.h>
+
 namespace Ui {
 class DataChart;
 }

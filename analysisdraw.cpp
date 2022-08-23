@@ -6,9 +6,8 @@ AnalysisDraw::AnalysisDraw(QWidget *parent) : QWidget(parent)
     DataIndex = 0;//ECG 下标
 }
 
-void AnalysisDraw::divideecgstr(QString ecgstring)
+void AnalysisDraw::divideecgstr(QVariantList ecglist)
 {
-    QStringList ecglist = ecgstring.split(",");
     indexsize = ecglist.size();
     for(int i=0;i<indexsize;i++)
     {

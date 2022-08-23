@@ -5,7 +5,6 @@
 #include "analysisdraw.h"
 #include <QString>
 
-
 namespace Ui {
 class AnalysisReport;
 }
@@ -17,8 +16,8 @@ class AnalysisReport : public QWidget
 public:
     explicit AnalysisReport(QWidget *parent = 0);
     ~AnalysisReport();
-    QString qstring;
-    void setqstring(QString databasestr);
+    QVariantList ecglist;//
+    AnalysisDraw * analysisdraw;
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -27,9 +26,6 @@ protected:
 
 private:
     Ui::AnalysisReport *ui;
-
-private slots:
-    void relogins();
 };
 
 #endif // ANALYSISREPORT_H

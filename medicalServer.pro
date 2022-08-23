@@ -31,9 +31,9 @@ SOURCES += \
     form.cpp \
     patientinfo.cpp \
     table.cpp \
+    datachart.cpp \
     analysisdraw.cpp \
-    analysisreport.cpp \
-    datachart.cpp
+    analysisreport.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,9 +44,9 @@ HEADERS += \
     form.h \
     patientinfo.h \
     table.h \
+    datachart.h \
     analysisdraw.h \
-    analysisreport.h \
-    datachart.h
+    analysisreport.h
 
 FORMS += \
         mainwindow.ui \

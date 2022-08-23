@@ -25,7 +25,7 @@ public:
     int ecgWave[2000];
     explicit AnalysisDraw(QWidget *parent = 0);
     void draw(QPainter * painter);
-    void divideecgstr(QString ecgstring);
+    void divideecgstr(QVariantList ecglist);//
 private:
     void drawDivide(QPainter * painter, int x, int y, int wCnt, int hCnt, int w, int h);
     void drawWave(QPainter * painter);

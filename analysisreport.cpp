@@ -14,11 +14,6 @@ AnalysisReport::~AnalysisReport()
     delete ui;
 }
 
-void AnalysisReport::setqstring(QString databasestr)
-{
-    qstring = databasestr;
-}
-
 void AnalysisReport::paintEvent(QPaintEvent *)
 {
 
@@ -29,17 +24,17 @@ bool AnalysisReport::eventFilter(QObject *watched, QEvent *e)
 
     if(e->type() == QEvent::Paint)
     {
-        waveOnFrame(ui->frame_2,qstring);
+        waveOnFrame(ui->frame_2,ecglist);
         return true;
     }
    return QWidget::eventFilter(watched,e);
 }
 
-void AnalysisReport::waveOnFrame(QWidget *w,QString ecgstring)
+void AnalysisReport::waveOnFrame(QWidget *w,QVariantList ecglist)
 {
     QPainter * painter = new QPainter(w);
     AnalysisDraw * draw = new AnalysisDraw();
-    draw->divideecgstr(ecgstring);
+    draw->divideecgstr(ecglist);
 
     painter->begin(draw);
     draw->draw(painter);

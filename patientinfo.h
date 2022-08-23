@@ -7,7 +7,6 @@
 #include <QtSql/QSqlQuery>
 #include <analysisreport.h>
 #include <QDateTime>
-#include <form.h>
 
 namespace Ui {
 class patientInfo;
@@ -53,6 +52,12 @@ private slots:
 
     void on_btnEcgDiagram_clicked();
 
+    void on_btnSpO2_clicked();
+
+    void on_btnPR_clicked();
+
+    void on_btnHR_clicked();
+
 signals:
     void showmain();
     void showsign();
@@ -61,7 +66,7 @@ private:
     Ui::patientInfo *ui;
     AnalysisReport analysisReportHome;
     void transformData();
-    Form *formhome;
+
 };
 
 #endif // PATIENTINFO_H

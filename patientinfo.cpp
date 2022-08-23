@@ -299,33 +299,102 @@ void patientInfo::on_btnEcg_clicked()
     db.transaction();
     int id = ui->lineEditIndex->text().toInt();
     QSqlQuery query;
-    QString sql = QString("select ecg from patient where id='%1'").arg(id);
+    QString sql = QString("select ecg from bodySigns where id='%1'").arg(id);
     if (query.exec(sql))
     {
+        db.commit();
         ui->lineEditIndex->clear();
         while(query.next())
         {
             ui->textEdit->insertPlainText(QString(query.value(0).toString()) +'\n');
         }
+    }else
+    {
+        db.rollback();
+        QMessageBox::information(this,"info","查询失败");
     }
 }
 
 
 void patientInfo::on_btnEcgDiagram_clicked()
 {
-    //    ///////myxxx类
+    // 此处为一个接口   ///////myxxx类
     int id = ui->lineEditIndex->text().toInt();
-    QString qstring = getEcg(id);
+
+    QVariantList ecglist = getEcg(id);//
 
     if (ui->lineEditIndex->text() != "")
     {
 //        this->hide();
-        analysisReportHome.setqstring(qstring);
+        analysisReportHome.analysisdraw->divideecgstr(ecglist);
         analysisReportHome.show();
 
     }
     else
     {
         QMessageBox::information(this,"Info","请输入病人编号");
+    }
+}
+
+void patientInfo::on_btnSpO2_clicked()
+{
+    db.transaction();
+    int id = ui->lineEditIndex->text().toInt();
+    QSqlQuery query;
+    QString sql = QString("select keySpo2 from bodySigns where id='%1'").arg(id);
+    if (query.exec(sql))
+    {
+        db.commit();
+        ui->lineEditIndex->clear();
+        while(query.next())
+        {
+            ui->textEdit->insertPlainText(QString(query.value(0).toString()) +'\n');
+        }
+    }else
+    {
+        db.rollback();
+        QMessageBox::information(this,"info","查询失败");
+    }
+}
+
+void patientInfo::on_btnPR_clicked()
+{
+    db.transaction();
+    int id = ui->lineEditIndex->text().toInt();
+    QSqlQuery query;
+    QString sql = QString("select keyResp from bodySigns where id='%1'").arg(id);
+    if (query.exec(sql))
+    {
+        db.commit();
+        ui->lineEditIndex->clear();
+        while(query.next())
+        {
+            ui->textEdit->insertPlainText(QString(query.value(0).toString()) +'\n');
+        }
+    }else
+    {
+        db.rollback();
+        QMessageBox::information(this,"info","查询失败");
+    }
+}
+
+void patientInfo::on_btnHR_clicked()
+{
+    db.transaction();
+    int id = ui->lineEditIndex->text().toInt();
+    QSqlQuery query;
+    QString sql = QString("select keyEcg from bodySigns where id = '%1'").arg(id);
+    if (query.exec(sql))
+    {
+        db.commit();
+        ui->lineEditIndex->clear();
+        while(query.next())
+        {
+            ui->textEdit->insertPlainText(QString(query.value(0).toString()) +'\n');
+        }
+    }else
+    {
+        db.rollback();
+        QMessageBox::information(this,"info","查询失败");
     }
 }

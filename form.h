@@ -11,7 +11,7 @@
 #include <QtPrintSupport/QtPrintSupport>
 #include <QPainter>
 #include <analysisreport.h>
-//#include <datachart.h>
+#include <datachart.h>
 
 
 namespace Ui {
@@ -29,7 +29,7 @@ public:
     QSqlQuery sql_query;
 
     table *tableView;
-//    DataChart *chartView;
+    DataChart *chartView;
 
 
 private slots:

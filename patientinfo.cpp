@@ -8,108 +8,18 @@
 #include<QSqlQuery>
 #include<mainwindow.h>
 #include<QDateTime>
+#include <msqlservice.h>
 
 patientInfo::patientInfo(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::patientInfo)
 {
     ui->setupUi(this);
-    QStringList type=QSqlDatabase::drivers();
-    qDebug()<<type;//显示一下支持哪些类型
-
-// createTable();//创建数据库
-//测试接口用：   insertData("20:20:20",7,"zhang",20,"male","80,90,100",80,"80,90,100",90,"80,90,100",100);
 }
 
 patientInfo::~patientInfo()
 {
     delete ui;
-}
-
-//插入数据至数据库
-
-void patientInfo::insertData(QDateTime time,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp)
-{
-    QString str = QString ("select id from patient where name = '%1' and age = '%2' and gender = '%3'")\
-            .arg(name).arg(age).arg(gender);
-    QSqlQuery query;//创造执行语句
-    query.exec(str);
-    if (query.first())
-    {
-        QString str2 = QString("INSERT INTO bodySigns (time,ecg,spo2,resp,keyEcg,keySpo2,keyResp) Values ('%1','%2','%3','%4','%5','%6','%7') where id = '%8'")
-                .arg(time.toString()).arg(ecg).arg(spo2).arg(resp).arg(keyEcg).arg(keySpo2).arg(keyResp).arg(id);
-        QSqlQuery query2;
-        if(!query2.exec(str2)){
-            qDebug()<<"Error:failed to insert!"<<sql_query.lastError();
-        }
-    }
-    else
-    {
-        QString str1 = QString("INSERT INTO patient (id,name,gender,age) Values ('%1','%2','%3','%4')")
-                .arg(id).arg(name).arg(gender).arg(age);
-        QString str2 = QString("INSERT INTO bodySigns (time,ecg,spo2,resp,keyEcg,keySpo2,keyResp) Values ('%1','%2','%3','%4','%5','%6','%7') where id = '%8'")
-                .arg(time.toString()).arg(ecg).arg(spo2).arg(resp).arg(keyEcg).arg(keySpo2).arg(keyResp).arg(id);
-        QSqlQuery query1;
-        if(!query1.exec(str1)){
-            qDebug()<<"Error:failed to insert!"<<sql_query.lastError();
-        }
-        QSqlQuery query2;
-        if(!query2.exec(str2)){
-            qDebug()<<"Error:failed to insert!"<<sql_query.lastError();
-        }
-    }
-
-//    QString str1 = QString("INSERT INTO patient (id,name,gender,age) Values ('%1','%2','%3','%4')")
-//            .arg(id).arg(name).arg(gender).arg(age);
-//    QString str2 = QString("INSERT INTO bodySigns (time,ecg,spo2,resp,keyEcg,keySpo2,keyResp) Values ('%1','%2','%3','%4','%5','%6','%7') where id = '%8'")
-//            .arg(time.toString()).arg(ecg).arg(spo2).arg(resp).arg(keyEcg).arg(keySpo2).arg(keyResp).arg(id);
-//    QSqlQuery query1;
-//    if(!query1.exec(str1)){
-//        qDebug()<<"Error:failed to insert!"<<sql_query.lastError();
-//    }
-//    QSqlQuery query2;
-//    if(!query2.exec(str2)){
-//        qDebug()<<"Error:failed to insert!"<<sql_query.lastError();
-//    }
-
-}
-//连接数据库
-void patientInfo::on_pushButton_clicked()
-{
-    db = QSqlDatabase::addDatabase("QMYSQL3");
-    db.setHostName("127.0.0.1");  //连接本地主机
-    db.setPort(3306);
-    db.setDatabaseName("db1");//数据库名称待修改
-    db.setUserName("root");
-    db.setPassword("zbh159110");//密码待填写
-    bool ok = db.open();
-
-    if (ok){
-        QMessageBox::information(this, "infor", "link success");
-    }
-    else {
-        QMessageBox::information(this, "infor", "link failed");
-        qDebug()<<"error open database because"<<db.lastError().text();
-    }
-}
-
-//创建数据表
-void patientInfo::createTable()
-{
-    sql_query = db.exec("DROP TABLE if exists patient");
-    qDebug()<<"drop table patient";
-    QString str = QString ("create table patient("
-                           "time varchar(30),"
-                           "id int primary key,"
-                           "name varchar(20) not null,"
-                           "gender varchar(20));");
-
-    if(!sql_query.exec(str))
-    {
-        qDebug()<<"Error: failed to create table!"<<sql_query.lastError();
-    }else{
-        qDebug()<<"Table created!";
-    }
 }
 
 int patientInfo::getIndex()
@@ -141,7 +51,6 @@ void patientInfo::on_btnSelectALL_clicked()
     QSqlQuery query;
     query.exec(sql);
     ui->textEdit->clear();
-
     //待修改
     while(query.next())
     {
@@ -151,9 +60,11 @@ void patientInfo::on_btnSelectALL_clicked()
         ui->textEdit->insertPlainText(QString(query.value(3).toString()+="\n"));
     }
 }
+
 //插入病人信息
 void patientInfo::on_btnInsert_clicked()
 {
+    QSqlDatabase db=QSqlDatabase::database();
     db.transaction();
     QSqlQuery query;
     QSqlQuery query2;
@@ -190,9 +101,11 @@ void patientInfo::on_btnInsert_clicked()
     else QMessageBox::information(this, "infor", "该病人信息已存在");
 
 }
+
 //删除病人信息
 void patientInfo::on_btnDelete_clicked()
 {
+    QSqlDatabase db=QSqlDatabase::database();
     db.transaction();
     QSqlQuery query;
 
@@ -214,9 +127,11 @@ void patientInfo::on_btnDelete_clicked()
         QMessageBox::information(this,"Info","请输入病人编号");
     }
 }
+
 //查询病人信息
 void patientInfo::on_btnQuery_clicked()
 {
+    QSqlDatabase db=QSqlDatabase::database();
     db.transaction();
     QSqlQuery query;
     if(ui->lineEditIndex->text()!="")
@@ -240,6 +155,7 @@ void patientInfo::on_btnQuery_clicked()
 //更新病人信息
 void patientInfo::on_btnUpdate_clicked()
 {
+    QSqlDatabase db=QSqlDatabase::database();
     db.transaction();
     QSqlQuery query;
     QString name=ui->lineEditName->text();
@@ -272,8 +188,8 @@ void patientInfo::on_btnUpdate_clicked()
         QMessageBox::information(this,"connection info","update failed!");
     }
 }
-//切换报表
 
+//切换报表
 void patientInfo::on_btnPrint_clicked()
 {
     if (ui->lineEditIndex->text() != "")
@@ -296,6 +212,7 @@ void patientInfo::on_btnClear_clicked()
 
 void patientInfo::on_btnEcg_clicked()
 {
+    QSqlDatabase db=QSqlDatabase::database();
     db.transaction();
     int id = ui->lineEditIndex->text().toInt();
     QSqlQuery query;
@@ -321,7 +238,7 @@ void patientInfo::on_btnEcgDiagram_clicked()
     // 此处为一个接口   ///////myxxx类
     int id = ui->lineEditIndex->text().toInt();
 
-    QVariantList ecglist = getEcg(id);//
+    QVariantList ecglist = MsqlService::getEcg(id);//
 
     if (ui->lineEditIndex->text() != "")
     {
@@ -338,6 +255,7 @@ void patientInfo::on_btnEcgDiagram_clicked()
 
 void patientInfo::on_btnSpO2_clicked()
 {
+    QSqlDatabase db=QSqlDatabase::database();
     db.transaction();
     int id = ui->lineEditIndex->text().toInt();
     QSqlQuery query;
@@ -359,6 +277,7 @@ void patientInfo::on_btnSpO2_clicked()
 
 void patientInfo::on_btnPR_clicked()
 {
+    QSqlDatabase db=QSqlDatabase::database();
     db.transaction();
     int id = ui->lineEditIndex->text().toInt();
     QSqlQuery query;
@@ -380,6 +299,7 @@ void patientInfo::on_btnPR_clicked()
 
 void patientInfo::on_btnHR_clicked()
 {
+    QSqlDatabase db=QSqlDatabase::database();
     db.transaction();
     int id = ui->lineEditIndex->text().toInt();
     QSqlQuery query;

@@ -2,7 +2,7 @@
 #include "ui_datachart.h"
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
-
+#include "msqlservice.h"
 
 DataChart::DataChart(QWidget *parent) :
     QWidget(parent),
@@ -25,15 +25,14 @@ DataChart::~DataChart()
 
 void DataChart::drawChart()
 {
-    //声明myxxx类
-//        getChartData(id,beginTime,endTime,interval,&datetime,&ecg,&resp,&spo2);
+        MsqlService::getChartData(id,beginTime,endTime,interval,datetime,ecg,resp,spo2);
         int index = datetime.size();
 
         QLineSeries *series1 = new QLineSeries();
         for(int i = 0; i< index;i++)
         {
             QBarSet *set = new QBarSet(datetime[i]);
-            *set << ecg[i];
+            *set << ecg[i].toInt();
             series1->append(set);
         }
         QChart *chart1 = new QChart();

@@ -31,7 +31,7 @@ SOURCES += \
     mdataframe.cpp \
     msqlservice.cpp \
     patient.cpp \
-    waveblock.cpp
+    waveblock.cpp\
     form.cpp \
     patientinfo.cpp \
     table.cpp \
@@ -47,7 +47,7 @@ HEADERS += \
     mdataframe.h \
     msqlservice.h \
     patient.h \
-    waveblock.h
+    waveblock.h\
     form.h \
     patientinfo.h \
     table.h \

@@ -19,7 +19,6 @@ class patientInfo : public QWidget
 public:
     explicit patientInfo(QWidget *parent = 0);
     ~patientInfo();
-    QSqlDatabase db;
     QSqlQuery sql_query;
 
     void insertData(QDateTime time,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp);//数据插入数据库接口

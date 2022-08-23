@@ -1,7 +1,7 @@
 #include "table.h"
 #include "ui_table.h"
 #include <QDebug>
-
+#include "msqlservice.h"
 
 table::table(QWidget *parent) :
     QWidget(parent),
@@ -25,15 +25,7 @@ void table::drawTable()
     QDateTime beginTime = patient->getBeginTime();
     QDateTime endTime = patient->getEndTime();
     qint64 interval = patient->getInterval();
-
-   //未加接口
-//    QSqlQueryModel MSqlService::getTableData(int id,QDateTime beginTime,QDateTime endTime,qint64 interval){
-//         QString sql = QString("select * from bodySigns where id = '' and time between '' and '' ").arg(id).arg(beginTime).arg(endTime).arg(interval);
-//        QSqlQueryModel *model = new QSqlQueryModel;
-//        model->setQuery(sql);
-//        return model;
-//    }
-
+    model=MsqlService::getTableData(id,beginTime,endTime,interval);
     model->setHeaderData(0, Qt::Horizontal, tr("Time"));
     model->setHeaderData(1, Qt::Horizontal, tr("HR"));
     model->setHeaderData(2, Qt::Horizontal, tr("SpO2"));

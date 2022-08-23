@@ -20,7 +20,7 @@ QVariantList MsqlService::decode(QByteArray &json)
 {
     QJsonDocument doc=QJsonDocument::fromJson(json);
     return doc.array().toVariantList();
-
+}
 
 bool MsqlService::insertInfo(QString gender, QString name, int age, QVariantList &ecg, QVariantList &spo2, QVariantList &resp, int heartRate, int highPr, int lowPr, int oxygen)
 {
@@ -47,13 +47,6 @@ bool MsqlService::insertInfo(QString gender, QString name, int age, QVariantList
     query.exec(str2);
 }
 
-QSqlQueryModel *MsqlService::getTableData(QString sql)
-{
-    QSqlQueryModel *model = new QSqlQueryModel;
-    model->setQuery(sql);
-    return model;
-}
-
 void MsqlService::getChartData(int id, QDateTime startTime, QDateTime endTime,qint64 divide, QStringList &datetime, QVariantList &ecg, QVariantList &resp, QVariantList &spo2)
 {
     QDateTime midTime=startTime;
@@ -72,6 +65,19 @@ void MsqlService::getChartData(int id, QDateTime startTime, QDateTime endTime,qi
         midTime=midTime.addSecs(divide);
         query.finish();
     }
+}
+
+QVariantList MsqlService::getEcg(int id)
+{
+
+}
+
+QSqlQueryModel *MsqlService::getTableData(int id, QDateTime beginTime, QDateTime endTime, qint64 interval)
+{
+    QString sql = QString("select * from bodySigns where id = '' and time between '' and '' ").arg(id).arg(formatTime(beginTime)).arg(formatTime(endTime)).arg(interval);
+    QSqlQueryModel *model = new QSqlQueryModel;
+    model->setQuery(sql);
+    return model;
 }
 
 MsqlService::MsqlService()

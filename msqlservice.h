@@ -13,6 +13,8 @@ public:
         static MsqlService sqlService;
         return sqlService;
     }
+    static QVariantList getEcg (int id);
+    static QSqlQueryModel *getTableData(int id,QDateTime beginTime,QDateTime endTime,qint64 interval);
     static QByteArray encode(QVariantList &vlist);
     static QString currentDateTimeString();
     static QString formatTime(QDateTime time);

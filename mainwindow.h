@@ -5,6 +5,11 @@
 #include "mdataframe.h"
 #include "helper.h"
 #include "patient.h"
+#include <QWidget>
+#include <QGridLayout>
+#include <QMainWindow>
+#include <patientinfo.h>
+#include <form.h>
 
 namespace Ui {
 class MainWindow;

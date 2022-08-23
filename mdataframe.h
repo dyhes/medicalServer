@@ -29,3 +29,5 @@ public:
 Q_DECLARE_METATYPE(MDataFrame)
 
 #endif // MDATAFRAME_H
+
+

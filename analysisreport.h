@@ -5,6 +5,7 @@
 #include "analysisdraw.h"
 #include <QString>
 
+
 namespace Ui {
 class AnalysisReport;
 }
@@ -18,6 +19,7 @@ public:
     ~AnalysisReport();
     QString qstring;
     void setqstring(QString databasestr);
+
 protected:
     void paintEvent(QPaintEvent *);
     bool eventFilter(QObject *watched, QEvent *e);
@@ -25,6 +27,9 @@ protected:
 
 private:
     Ui::AnalysisReport *ui;
+
+private slots:
+    void relogins();
 };
 
 #endif // ANALYSISREPORT_H

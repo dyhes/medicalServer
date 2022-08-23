@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network sql printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network sql printsupport charts
 TARGET = medicalServer
 TEMPLATE = app
 
@@ -31,9 +31,9 @@ SOURCES += \
     form.cpp \
     patientinfo.cpp \
     table.cpp \
-    datachart.cpp \
     analysisdraw.cpp \
-    analysisreport.cpp
+    analysisreport.cpp \
+    datachart.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,14 +44,14 @@ HEADERS += \
     form.h \
     patientinfo.h \
     table.h \
-    datachart.h \
     analysisdraw.h \
-    analysisreport.h
+    analysisreport.h \
+    datachart.h
 
 FORMS += \
         mainwindow.ui \
     form.ui \
     patientinfo.ui \
     table.ui \
-    datachart.ui \
-    analysisreport.ui
+    analysisreport.ui \
+    datachart.ui

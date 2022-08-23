@@ -3,11 +3,11 @@
 
 #include <QWidget>
 #include <QMainWindow>
-#include <form.h>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <analysisreport.h>
-#include <QTime>
+#include <QDateTime>
+#include <form.h>
 
 namespace Ui {
 class patientInfo;
@@ -22,9 +22,14 @@ public:
     ~patientInfo();
     QSqlDatabase db;
     QSqlQuery sql_query;
-    void insertData(QString time,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp);//数据插入数据库接口
-    void openDatabase();//连接数据库
+
+    void insertData(QDateTime time,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp);//数据插入数据库接口
     void createTable();//创建数据表
+
+    int getIndex();
+    QDateTime getBeginTime();
+    QDateTime getEndTime();
+    qint64 getInterval();
 
 private slots:
 
@@ -40,11 +45,23 @@ private slots:
 
     void on_btnPrint_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_btnClear_clicked();
+
+    void on_btnEcg_clicked();
+
+    void on_btnEcgDiagram_clicked();
+
+signals:
+    void showmain();
+    void showsign();
+
 private:
     Ui::patientInfo *ui;
-    Form *formhome;
     AnalysisReport analysisReportHome;
-
+    void transformData();
+    Form *formhome;
 };
 
 #endif // PATIENTINFO_H

@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <QSqlQueryModel>
 #include <QSqlQuery>
+#include <patientinfo.h>
 
 namespace Ui {
 class table;
@@ -15,16 +16,16 @@ class table : public QWidget
     Q_OBJECT
 
 public:
-    explicit table(QString name,QWidget *parent = 0);
+    explicit table(QWidget *parent = 0);
     ~table();
-    void drawTable(QString name);
+    void drawTable();
 
 
 private:
     Ui::table *ui;
     QSqlQueryModel *model;
     QTableView *view;
-    QString m_name;
+    patientInfo *patient;
 };
 
 #endif // TABLE_H

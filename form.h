@@ -10,6 +10,9 @@
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QtPrintSupport>
 #include <QPainter>
+#include <analysisreport.h>
+//#include <datachart.h>
+
 
 namespace Ui {
 class Form;
@@ -20,19 +23,24 @@ class Form : public QWidget
     Q_OBJECT
 
 public:
-    explicit Form(QString name,QWidget *parent = 0);
+    explicit Form(QWidget *parent = 0);
     ~Form();
     QSqlDatabase db;
     QSqlQuery sql_query;
+
     table *tableView;
+//    DataChart *chartView;
+
 
 private slots:
-//    void on_pushButton_clicked();
-//    void selectData(QString name, QDateTime time, QString dataItem);
+
+    void on_pushButtonEcg_clicked();
+    void receivelogins();
+
 private:
     Ui::Form *ui;
-    QString m_name;
-
+    QString m_name = "";
+    AnalysisReport analysisReportHome;
 
 };
 

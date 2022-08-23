@@ -3,57 +3,59 @@
 #include <QDateTime>
 #include<QDebug>
 
-
-Form::Form(QString name,QWidget *parent) :
-    m_name(name),QWidget(parent),
-    tableView(new table(name)),
+Form::Form(QWidget *parent) :
+    QWidget(parent),
+    tableView(new table()),
+//    chartView(new DataChart()),
     ui(new Ui::Form)
 {
     ui->setupUi(this);
     QDateTime current_date_time =QDateTime::currentDateTime();
     QString current_date = current_date_time.toString("yyyy.MM.dd hh:mm:ss");
     ui->labelTime->setText(current_date);
-    ui->labelName->setText("病人姓名：" + name);
+
 
     tableView->setParent(ui->frameTable);
+//    chartView->setParent(ui->frameChart);
 
-    qDebug()<<name;
-
-    this->show();
 }
 Form::~Form()
 {
     delete ui;
 }
 
-//void Form::selectData(QString name,QDateTime datetime,QString dataItem)
-//{
-//    QString str = QString("Select '%1' from patient where name = '%2' and datetime = '%3'").arg(dataItem).arg(name).arg(datetime);
+void Form::on_pushButtonEcg_clicked()
+{
+    QSqlQuery query;
+    int id = ui->labelId->text().toInt();
+    this->hide();
+    QString str = QString("select ecg from patient where id = '%1'").
+            arg(id);
+    qDebug()<<id;
+    if(!query.exec(str))
+    {
+        QMessageBox::information(this,"Info","查询失败");
+    }
+    else
+    {
+        QString qstring;
+//        第一个Bug
+        while(query.next())
+        {
+            qstring = query.value(0).toString();
+            qDebug()<<qstring;
+        }
+        //QString qstring = "2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2008, 2016, 2016, 2016, 2024, 2032, 2048,2064, 2064, 2064, 2072, 2080, 2080, 2080, 2088, 2096, 2104,2112, 2112, 2112, 2112, 2112, 2112, 2104, 2096, 2088,2080, 2080, 2080, 2072, 2064, 2064, 2064, 2048, 2032, 2032,2032, 2016, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 1992, 1984, 1976,1968, 1960, 1952, 1944, 1936, 1944, 1952, 2016, 2080, 2136,2192, 2256, 2320, 2376, 2432, 2488, 2544, 2568, 2592, 2536,2480, 2424, 2368, 2304, 2240, 2184, 2128, 2072, 2016, 1968,1920, 1928, 1936, 1944, 1952, 1960, 1968, 1984, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2008, 2016, 2024, 2032, 2032,2032, 2048, 2064, 2064, 2064, 2072, 2080, 2088, 2096, 2104,2112, 2112, 2112, 2120, 2128, 2136, 2144, 2152, 2160, 2160,2160, 2160, 2160, 2168, 2176, 2176, 2176, 2184, 2192,2192, 2192, 2192, 2200, 2208, 2208, 2208, 2208, 2208, 2208,2208, 2200, 2192, 2192, 2192, 2184, 2176, 2176, 2176, 2168,2160, 2160, 2160, 2144, 2128, 2128, 2128, 2128, 2128, 2112,2096, 2088, 2080, 2072, 2064, 2064, 2064, 2048, 2032, 2024,2016, 2016, 2016, 2008, 2000, 2000, 2000, 2000, 2000,2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000";
 
-//}
+        analysisReportHome.setqstring(qstring);
+        analysisReportHome.show();
+    }
+}
+
+void Form::receivelogins()
+{
+    this->show();
+}
 
 
-//void Form::on_pushButton_clicked()
-//{
-//    QFile pdfFile("d:\\数据报表.pdf");//输出文件名
-//        if(!pdfFile.open(QIODevice::WriteOnly))
-//        {
-//            QMessageBox::warning(this,tr("write File"),tr("Cannot open file:\n%1").arg("d:\\test.pdf"));
-//            return;
-//        }
-//        QPdfWriter *pdfWriter = new QPdfWriter(&pdfFile);               //实例化QPdfWriter 可以设置PDF文件的一些参数
-//        pdfWriter->setPageSize(QPagedPaintDevice::A4);                  //设置纸张为A4纸
-//        pdfWriter->setResolution(QPrinter::ScreenResolution);           //设置分辨率 屏幕分辨率 打印机分辨率 高分辨率
-//        pdfWriter->setPageMargins(QMarginsF(40, 40, 40, 40));//设置页边距 顺序是:左上右下
 
-//        QPixmap pixmap = QWidget::grab(ui->frameChart->rect());  //获取widget的界面 控制你要抓取的widget
-
-//        QPainter painter_pixmap;
-//        painter_pixmap.begin(pdfWriter);
-//        QRect rect = painter_pixmap.viewport();
-//        int scale = rect.width()/pixmap.width();
-//        painter_pixmap.scale(scale, scale); //图像缩放
-//        painter_pixmap.drawPixmap(0, 0, pixmap);  //画图
-//        painter_pixmap.end();
-//        QDesktopServices::openUrl(QUrl::fromLocalFile("d:\\test.pdf"));
-//}

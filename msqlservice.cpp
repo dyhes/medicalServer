@@ -1,17 +1,14 @@
 #include "msqlservice.h"
-#include <QSqlDatabase>
-#include <QMessageBox>
-#include <QDebug>
-#include <QSqlError>
-#include <QSqlDatabase>
-#include <QSqlQuery>
+
 
 QByteArray endcode(QVariantList &vlist){
     QJsonDocument doc=QJsonDocument(QJsonArray::fromVariantList(vlist));
     return doc.toJson(QJsonDocument::Compact);
 }
 
-//QVariantList decode(QByteArray )
+QVariantList decode(QByteArray rawData){
+    
+}
 
 bool MsqlService::insertInfo(QString gender, QString name, int age, QVariantList &ecg, QVariantList &spo2, QVariantList &resp, int heartRate, int highPr, int lowPr, int oxygen)
 {

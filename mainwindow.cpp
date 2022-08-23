@@ -18,10 +18,3 @@ void MainWindow::receiveDataFrame(MDataFrame* dataframe)
 {
     //qDebug()<<dataframe->error;
 }
-
-void on_btn_clicked(){
-    //数据库查询
-    MsqlService &service=MsqlService::getService();
-    //service.selectInfo();
-
-}

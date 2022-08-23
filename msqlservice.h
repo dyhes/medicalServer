@@ -6,14 +6,17 @@
 class MsqlService
 {
 public:
-    bool insertInfo(QString gender, QString name, int age, QVariantList &ecg, QVariantList &spo2, QVariantList &resp, int heartRate, int highPr, int lowPr, int oxygen);
-    void getTableData(QSqlQueryModel *m_model);//用于取得对应的数据库模型
-    void getChartData(int id,QString time,int divide,QStringList &datetime,QVariantList &ecg,QVariantList &resp,QVariantList &spo2);
-    bool selectInfo();
+    static bool insertInfo(QString gender, QString name, int age, QVariantList &ecg, QVariantList &spo2, QVariantList &resp, int heartRate, int highPr, int lowPr, int oxygen);
+    static QSqlQueryModel *getTableData(QString sql);
+    static void getChartData(int id,QDateTime startTime,QDateTime endTime,qint64 divide,QStringList &datetime,QVariantList &ecg,QVariantList &resp,QVariantList &spo2);
     static MsqlService& getService() {
         static MsqlService sqlService;
         return sqlService;
     }
+    static QByteArray encode(QVariantList &vlist);
+    static QString currentDateTimeString();
+    static QString formatTime(QDateTime time);
+    static QVariantList decode(QByteArray &json);
 private:
     MsqlService();
     MsqlService(MsqlService const&);

@@ -1,4 +1,5 @@
 #include "mthread.h"
+#include "msqlservice.h"
 
 MThread::MThread(qintptr socketDescriptor, QObject *parent) : QThread(parent),socketDescriptor(socketDescriptor)
 {
@@ -68,6 +69,8 @@ void MThread::parseData()
     MDataFrame *data=new MDataFrame(this->currentThreadId(),gender,name,age,ecg,spo2,resp,heartRate,highPr,lowPr,oxygen);
     emit sendDataFrame(data);
     //save to database
+    MsqlService &service=MsqlService::getService();
+    service.insertInfo(gender,name,age,ecg,spo2,resp,heartRate,highPr,lowPr,oxygen);
 }
 
 void MThread::requestResending()

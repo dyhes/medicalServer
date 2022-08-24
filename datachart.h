@@ -34,7 +34,7 @@ private:
     QVariantList ecg;
     QVariantList resp;
     QVariantList spo2;
-    patientInfo * patient;
+    patientInfo patient;
 };
 
 

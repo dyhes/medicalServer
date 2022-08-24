@@ -19,7 +19,7 @@ class patientInfo : public QWidget
 public:
     explicit patientInfo(QWidget *parent = 0);
     ~patientInfo();
-    QSqlQuery sql_query;
+//    QSqlQuery sql_query;
 
     void insertData(QDateTime time,int id,QString name,int age,QString gender,QString ecg,int keyEcg,QString spo2,int keySpo2,QString resp,int keyResp);//数据插入数据库接口
     void createTable();//创建数据表
@@ -42,8 +42,6 @@ private slots:
     void on_btnUpdate_clicked();
 
     void on_btnPrint_clicked();
-
-    void on_pushButton_clicked();
 
     void on_btnClear_clicked();
 

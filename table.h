@@ -25,7 +25,7 @@ private:
     Ui::table *ui;
     QSqlQueryModel *model;
     QTableView *view;
-    patientInfo *patient;
+    patientInfo patient;
 };
 
 #endif // TABLE_H

@@ -5,8 +5,7 @@
 
 Form::Form(QWidget *parent) :
     QWidget(parent),
-    tableView(new table()),
-    chartView(new DataChart()),
+
     ui(new Ui::Form)
 {
     ui->setupUi(this);
@@ -14,7 +13,8 @@ Form::Form(QWidget *parent) :
     QString current_date = current_date_time.toString("yyyy.MM.dd hh:mm:ss");
     ui->labelTime->setText(current_date);
 
-
+    tableView = new table();
+//    chartView = new DataChart();
     tableView->setParent(ui->frameTable);
 //    chartView->setParent(ui->frameChart);
 
@@ -22,6 +22,8 @@ Form::Form(QWidget *parent) :
 Form::~Form()
 {
     delete ui;
+    delete tableView;
+//    delete chartView;
 }
 
 void Form::receivelogins()

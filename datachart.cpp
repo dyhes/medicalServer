@@ -11,10 +11,10 @@ DataChart::DataChart(QWidget *parent) :
     ui->setupUi(this);
 
 //    ///////////////////////////////调用四个get方法
-    id = patient->getIndex();
-    beginTime = patient->getBeginTime();
-    endTime = patient->getEndTime();
-    interval = patient->getInterval();
+    id = patient.getIndex();
+    beginTime = patient.getBeginTime();
+    endTime = patient.getEndTime();
+    interval = patient.getInterval();
     drawChart();
 }
 
@@ -31,11 +31,14 @@ void DataChart::drawChart()
         QLineSeries *series1 = new QLineSeries();
         for(int i = 0; i< index;i++)
         {
-            QBarSet *set = new QBarSet(datetime[i]);
-            *set << ecg[i].toInt();
-            series1->append(set);
+            int ecgnum = ecg[i].toInt();
+            series1->append(i,ecgnum);
         }
         QChart *chart1 = new QChart();
+        QBarCategoryAxis *axis1 = new QBarCategoryAxis();
+        axis1->append(datetime);
+        chart1->createDefaultAxes();
+        chart1->setAxisX(axis1, series1);
         chart1->legend()->hide();
         chart1->addSeries(series1);
         chart1->createDefaultAxes();
@@ -54,11 +57,14 @@ void DataChart::drawChart()
         QLineSeries *series2 = new QLineSeries();
         for(int i = 0; i< index;i++)
         {
-            QBarSet *set = new QBarSet(datetime[i]);
-            *set << resp[i];
-            series2->append(set);
+            int respnum = resp[i].toInt();
+            series1->append(i,respnum);
         }
         QChart *chart2 = new QChart();
+        QBarCategoryAxis *axis2 = new QBarCategoryAxis();
+        axis2->append(datetime);
+        chart2->createDefaultAxes();
+        chart2->setAxisX(axis2, series2);
         chart2->legend()->hide();
         chart2->addSeries(series2);
         chart2->createDefaultAxes();
@@ -77,11 +83,14 @@ void DataChart::drawChart()
         QLineSeries *series3 = new QLineSeries();
         for(int i = 0; i< index;i++)
         {
-            QBarSet *set = new QBarSet(datetime[i]);
-            *set << spo2[i];
-            series3->append(set);
+            int spo2num = spo2[i].toInt();
+            series1->append(i,spo2num);
         }
         QChart *chart3 = new QChart();
+        QBarCategoryAxis *axis3 = new QBarCategoryAxis();
+        axis3->append(datetime);
+        chart3->createDefaultAxes();
+        chart3->setAxisX(axis3, series3);
         chart3->legend()->hide();
         chart3->addSeries(series3);
         chart3->createDefaultAxes();

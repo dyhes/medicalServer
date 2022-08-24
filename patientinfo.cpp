@@ -15,6 +15,7 @@ patientInfo::patientInfo(QWidget *parent) :
     ui(new Ui::patientInfo)
 {
     ui->setupUi(this);
+
 }
 
 patientInfo::~patientInfo()
@@ -24,6 +25,7 @@ patientInfo::~patientInfo()
 
 int patientInfo::getIndex()
 {
+
     return ui->lineEditIndex->text().toInt();
 }
 
@@ -238,13 +240,13 @@ void patientInfo::on_btnEcgDiagram_clicked()
     // 此处为一个接口   ///////myxxx类
     int id = ui->lineEditIndex->text().toInt();
 
-    QVariantList ecglist = MsqlService::getEcg(id);//
-
     if (ui->lineEditIndex->text() != "")
     {
 //        this->hide();
-        analysisReportHome.analysisdraw->divideecgstr(ecglist);
-        analysisReportHome.show();
+        QVariantList ecglist = MsqlService::getEcg(id);//
+        analysisReportHome.setecglist(ecglist);
+//        analysisReportHome.show();
+        emit showsign();
 
     }
     else

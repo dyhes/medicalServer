@@ -72,14 +72,6 @@ QVariantList MsqlService::getEcg(int id)
 
 }
 
-QSqlQueryModel *MsqlService::getTableData(int id, QDateTime beginTime, QDateTime endTime, qint64 interval)
-{
-    QString sql = QString("select * from bodySigns where id = '' and time between '' and '' ").arg(id).arg(formatTime(beginTime)).arg(formatTime(endTime)).arg(interval);
-    QSqlQueryModel *model = new QSqlQueryModel;
-    model->setQuery(sql);
-    return model;
-}
-
 MsqlService::MsqlService()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL3");

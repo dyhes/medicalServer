@@ -17,15 +17,20 @@ table::table(QWidget *parent) :
 table::~table()
 {
     delete ui;
+    delete view;
+    delete model;
 }
 
 void table::drawTable()
 {
-    int id = patient->getIndex();
-    QDateTime beginTime = patient->getBeginTime();
-    QDateTime endTime = patient->getEndTime();
-    qint64 interval = patient->getInterval();
-    model=MsqlService::getTableData(id,beginTime,endTime,interval);
+    int id = patient.getIndex();
+    QDateTime beginTime = patient.getBeginTime();
+    QDateTime endTime = patient.getEndTime();
+    qint64 interval = patient.getInterval();
+
+    QString sql = QString("select time,keyEcg,keySpo2,keyResp from bodySigns where patientId = '%1'").arg(id);
+    model->setQuery(sql);
+
     model->setHeaderData(0, Qt::Horizontal, tr("Time"));
     model->setHeaderData(1, Qt::Horizontal, tr("HR"));
     model->setHeaderData(2, Qt::Horizontal, tr("SpO2"));

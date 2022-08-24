@@ -28,20 +28,15 @@ public:
     QSqlDatabase db;
     QSqlQuery sql_query;
 
-    table *tableView;
-    DataChart *chartView;
-
-
 private slots:
-
-    void on_pushButtonEcg_clicked();
     void receivelogins();
 
 private:
     Ui::Form *ui;
     QString m_name = "";
     AnalysisReport analysisReportHome;
-
+    table *tableView;
+//    DataChart *chartView;
 };
 
 #endif // FORM_H

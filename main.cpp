@@ -19,12 +19,11 @@ int main(int argc, char *argv[])
     server.start();
 //    w.show();
     QFont f("Microsoft YaHei");
-
     a.setFont(f);
-
-    Form w2;
     patientInfo w3;
     w3.show();
+
+    Form w2;
     QObject::connect(&w3, SIGNAL(showmain()),&w2,SLOT(receivelogins()));
     AnalysisReport w4;
     QObject::connect(&w3, SIGNAL(showmain()),&w4,SLOT(relogins()));

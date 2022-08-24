@@ -4,6 +4,7 @@
 
 
 Qt::HANDLE hd=new void *;
+Qt::HANDLE hxd=new void *;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,13 +13,16 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setupUi();
-    QTimer::singleShot(5000,this,&MainWindow::test1);
+    //QTimer::singleShot(5000,this,&MainWindow::test1);
 }
 
 void MainWindow::test2()
 {
     qDebug("in test2");
-    MDataFrame *sampDF=new MDataFrame(hd,MDataFrame::ClientdisconnectError);
+//    MDataFrame *sampDF=new MDataFrame(hd,MDataFrame::ClientdisconnectError);
+    QVariantList sampList;
+    sampList.append(2000);
+    MDataFrame *sampDF = new MDataFrame(hxd,"man","zlj",20,sampList,sampList,sampList,12,342,253,43);
     receiveDataFrame(sampDF);
 }
 

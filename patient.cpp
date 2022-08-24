@@ -8,20 +8,14 @@ patient::patient(MDataFrame *dataframe, QWidget *parent):QWidget(parent)
     ecgBlock = new DrawWave(0, 0, &(dataframe->ecg));
     spo2Block = new DrawWave(0, 1, &(dataframe->spo2));
     respBlock = new DrawWave(0, 2, &(dataframe->resp));
-//    ecgBlock->resize(610,150);
-//    spo2Block->resize(610,150);
-//    respBlock->resize(610,150);
 
     //波形标题
     QLabel * title1 = new QLabel("  ECGII      x1");
     title1->setStyleSheet("background-color: black;color:white;font-size:15px;font:bold");
-//    title1->setMaximumWidth(610);
     QLabel * title2 = new QLabel("  SPO2");
     title2->setStyleSheet("background-color: black;color:white;font-size:15px;font:bold");
-//    title2->setMaximumWidth(610);
     QLabel * title3 = new QLabel("  RESP      x1");
     title3->setStyleSheet("background-color: black;color:white;font-size:15px;font:bold");
-//    title3->setMaximumWidth(610);
 
     //4个数据模块
     heartRate = new DataBlock(0, 0);
@@ -46,8 +40,6 @@ patient::patient(MDataFrame *dataframe, QWidget *parent):QWidget(parent)
 
     //lay_right放4个数据模块
     QVBoxLayout *lay_right = new QVBoxLayout;
-//    lay_right->setSpacing(0);
-//    lay_right->setMargin(0);
     lay_right->addWidget(heartRate);
     lay_right->addWidget(highPr);
     lay_right->addWidget(lowPr);
@@ -61,7 +53,7 @@ patient::patient(MDataFrame *dataframe, QWidget *parent):QWidget(parent)
 
     name=dataframe->name;
     QString Infomation = "name:"+dataframe->name+"   age:"+QString::number(dataframe->age)+"   gender:"+dataframe->gender;
-    QLabel *PatientInfomation = new QLabel(Infomation);
+    PatientInfomation = new QLabel(Infomation);
     PatientInfomation->setStyleSheet("background-color: grey;color:white;font-size:15px;font:bold");
 
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -71,5 +63,15 @@ patient::patient(MDataFrame *dataframe, QWidget *parent):QWidget(parent)
 
 void patient::receiveDataFrame(MDataFrame *dataframe)
 {
-    
+    //更新病人信息
+    ecgBlock->datalist = &(dataframe->ecg);
+    spo2Block->datalist = &(dataframe->spo2);
+    respBlock->datalist = &(dataframe->resp);
+
+    heartRate->data->setText(QString::number(dataframe->heartRate));
+    highPr->data->setText(QString::number(dataframe->highPr));
+    lowPr->data->setText(QString::number(dataframe->lowPr));
+    oxygen->data->setText(QString::number(dataframe->oxygen));
+
+    PatientInfomation->setText("name:"+dataframe->name+"   age:"+QString::number(dataframe->age)+"   gender:"+dataframe->gender);
 }

@@ -20,6 +20,8 @@ public:
     DataBlock * oxygen;
     DataBlock * highPr;
     DataBlock * lowPr;
+    //病人信息（姓名、年龄、性别）
+    QLabel *PatientInfomation;
     void receiveDataFrame(MDataFrame *dataframe);
 };
 

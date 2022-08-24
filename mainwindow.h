@@ -9,7 +9,9 @@
 #include <QGridLayout>
 #include <QMainWindow>
 #include <patientinfo.h>
+#include "patient.h"
 #include <form.h>
+#include <QMap>
 
 namespace Ui {
 class MainWindow;
@@ -25,7 +27,13 @@ public:
 public slots:
     void receiveDataFrame(MDataFrame* dataframe);
 private:
+    int cnt{0};
+    QMap<Qt::HANDLE,patient*>connections;
+    void test1();
+    void test2();
+    QGridLayout *layout;
     Ui::MainWindow *ui;
+    void setupUi();
 };
 
 #endif // MAINWINDOW_H

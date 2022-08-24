@@ -25,6 +25,11 @@ DataChart::~DataChart()
 
 void DataChart::drawChart()
 {
+        qDebug()<<"here";
+        qDebug()<<id;
+        qDebug()<<beginTime;
+        qDebug()<<endTime;
+        qDebug()<<interval;
         MsqlService::getChartData(id,beginTime,endTime,interval,datetime,ecg,resp,spo2);
         int index = datetime.size();
 

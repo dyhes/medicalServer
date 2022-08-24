@@ -15,10 +15,12 @@ public:
     DrawWave * spo2Block;
     DrawWave * respBlock;
     //4个数据模块
+    QString name;
     DataBlock * heartRate;
     DataBlock * oxygen;
     DataBlock * highPr;
     DataBlock * lowPr;
+    void receiveDataFrame(MDataFrame *dataframe);
 };
 
 #endif // PATIENT_H

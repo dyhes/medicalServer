@@ -69,7 +69,11 @@ void MsqlService::getChartData(int id, QDateTime startTime, QDateTime endTime,qi
 
 QVariantList MsqlService::getEcg(int id)
 {
-
+    QSqlQuery query;
+    query.exec(QString("select ecg from bodySigns where patientId=%1 order by time desc").arg(id));
+    query.next();
+    QByteArray arr=query.value("ecg").toByteArray();
+    return decode(arr);
 }
 
 MsqlService::MsqlService()

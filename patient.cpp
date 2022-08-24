@@ -59,6 +59,7 @@ patient::patient(MDataFrame *dataframe, QWidget *parent):QWidget(parent)
     lay->addLayout(lay_left);
     lay->addLayout(lay_right);
 
+    name=dataframe->name;
     QString Infomation = "name:"+dataframe->name+"   age:"+QString::number(dataframe->age)+"   gender:"+dataframe->gender;
     QLabel *PatientInfomation = new QLabel(Infomation);
     PatientInfomation->setStyleSheet("background-color: grey;color:white;font-size:15px;font:bold");
@@ -66,4 +67,9 @@ patient::patient(MDataFrame *dataframe, QWidget *parent):QWidget(parent)
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(PatientInfomation);
     layout->addLayout(lay);
+}
+
+void patient::receiveDataFrame(MDataFrame *dataframe)
+{
+    
 }
